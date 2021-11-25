@@ -1,0 +1,29 @@
+{
+  "name": "city-data-gathering",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest"
+  },
+  "author": "ZePaiva <zmppaiva99@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZePaiva/city-data/city-data-gathering/issues"
+  },
+  "homepage": "https://github.com/ZePaiva/city-data/city-data-gathering#readme",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "debug": "^4.3.2",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "inherits": "^2.0.4",
+    "jest": "^27.3.1",
+    "mocha": "^5.2.0",
+    "ms": "^2.1.1"
+  }
+}
