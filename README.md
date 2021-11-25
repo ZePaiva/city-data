@@ -13,7 +13,7 @@ Gathers data from multiple external API's and processes them in order to display
 #### Building:
 To build the backend simply use `npm install` or build the docker container
 ```
-$ docker build -t city-gather:latest
+$ docker build -t city-gather:latest ./city-data-gathering
 ```
 
 #### Testing:
