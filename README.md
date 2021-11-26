@@ -11,9 +11,10 @@ Gathers data from multiple external API's and processes them in order to display
 
 
 #### Building:
-To build the backend simply use `npm install` or build the docker container
+To build the backend simply use `npm install` or build the docker volume and container
 ```
 $ docker build -t city-gather:latest ./city-data-gathering
+$ docker volume create city-gather-volume
 ```
 
 #### Testing:
@@ -23,8 +24,7 @@ To test simply run `npm test`
 #### Running:
 You have the option to run the container by using either the compose or the docker CLI
 ```
-$ docker-compose up -d
-$ docker run --name city-gather -d -p 8000:8000 city-gather
+$ docker run --name city-gather -d -p 8000:8000 city-gather -v vity-gather-volume:/app
 ```
 After executing one of the aforementioned commands check if the `docker ps` output is similar to this
 ```
@@ -36,10 +36,28 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 
 Optionally you can run the application in your own machine with teh following command:
 ```
-npm run start
+$ npm run start
 ```
 
 Be advised that this was developed for a linux system with Node.js so there is no guarantee it will work in MS Windows systems as is.
+
+#### Logging and Debugging
+The application automatically writes it's logging steps in logs/app.log.
+To access this data in the docker volume execute the following
+```
+$ docker volume inspect city-gather-volume
+[
+    {
+        ...
+        "Mountpoint": <VOLUME-DIRECTORY>
+        ...
+    }
+]
+$ cd <VOLUME-DIRECTORY>/_data/logs
+$ cat app.log
+```
+
+If your user does not have the proper docker permissions try using superuser permissions (`su -`) or check your user groups permissions 
 
 
 ### [city-data-display](./city-data-display "frontend component")
