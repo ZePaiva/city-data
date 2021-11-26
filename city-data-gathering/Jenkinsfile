@@ -15,7 +15,6 @@ node {
       def testContainer = docker.image('node:latest')
       testContainer.pull()
       testContainer.inside {
-        sh 'pwd'
         sh 'npm install'
         sh 'npm test'
       }

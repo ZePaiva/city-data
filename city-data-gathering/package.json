@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "test": "jest"
+    "dev": "DEBUG=app:* nodemon src/index.js",
+    "test": "NODE_ENV=testing jest --coverage"
   },
   "author": "ZePaiva <zmppaiva99@gmail.com>",
   "license": "ISC",
@@ -16,14 +16,18 @@
   "homepage": "https://github.com/ZePaiva/city-data/city-data-gathering#readme",
   "dependencies": {
     "assert": "^2.0.0",
+    "axios": "^0.24.0",
+    "config": "^3.3.6",
     "debug": "^4.3.2",
-    "express": "^4.17.1",
-    "nodemon": "^2.0.15"
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "inherits": "^2.0.4",
     "jest": "^27.3.1",
     "mocha": "^5.2.0",
-    "ms": "^2.1.1"
+    "ms": "^2.1.1",
+    "jsdoc": "^3.6.7",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.1.6"
   }
 }

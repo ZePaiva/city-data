@@ -1,10 +1,15 @@
 const express = require('express');
+const fs = require('fs');
+const config = require('config');
 const expressDebug = require('debug')('app:express');
+const uncaughtDebug = require('debug')('app:Uncaught')
 
 const app = express();
-const port = process.env.PORT || 8000;
-const frontend_addr = process.env.FEIP || '127.0.0.1';
-const frontend_port = process.env.FEPT || 3000;
+const port = config.get('PORT') || 8000;
+const frontend_addr = config.get('FRONTEND_IP') || '127.0.0.1';
+const frontend_port = config.get('FRONTEND_PORT') || 3000;
+
+const cdgRouter = require('./core/core');
 
 app.use((req, res, next) => {
     var allowedOrigins = ['http://127.0.0.1:3000', 'http://localhost:3000', 'http://'+frontend_addr+':'+frontend_port];
@@ -17,20 +22,23 @@ app.use((req, res, next) => {
 });
 
 process.on('uncaughtException', (ex) => {
-    fs.appendFileSync('uncaught.log', new Date().toISOString() + " - uncaughtException - " + ex + '\n');
+    fs.appendFileSync(config.get('LOG_DIR')+'uncaught.log', new Date().toISOString() + " - uncaughtException - " + ex + '\n');
     uncaughtDebug(ex)
 });
 process.on('unhandledRejection', (ex) => {
-    fs.appendFileSync('uncaught.log', new Date().toISOString() + " - unhandledRejection - " + ex + '\n');
+    fs.appendFileSync(config.get('LOG_DIR')+'uncaught.log', new Date().toISOString() + " - unhandledRejection - " + ex + '\n');
     uncaughtDebug(ex)
 });
 
-app.listen(port, () => {
-    expressDebug('Server is up & running @ port ${port}')
-});
 
 app.get('/', async (req, res) => {
-    res.send('ola')
+    res.send('Hello world')
 })
 
-console.log("hello world");
+app.use('/cdg', cdgRouter)
+
+app.listen(port, () => {
+    expressDebug(`Server is up & running @ port ${port}`)
+});
+
+module.exports=app;

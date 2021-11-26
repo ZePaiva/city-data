@@ -1,0 +1,7 @@
+{
+    "OpenWeather": "c23abdf2ed90b8421c9644f0d0ea85fb",
+    "LOG_DIR": "./logs/",
+    "PORT": 8000,
+    "FRONTEND_IP": "FRONTEND_IP",
+    "FRONTEND_PORT": 3000
+}
