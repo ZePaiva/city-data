@@ -1,5 +1,6 @@
-const axios = require('axios')
 const fs = require('fs')
+const axios = require('axios')
+const logger = require('../logger')
 const debug = require('debug')('app:gateway')
 
 
@@ -26,6 +27,7 @@ async function get_weather(city_name, api_key='c23abdf2ed90b8421c9644f0d0ea85fb'
         }
     }
     debug(`[get_weather] getting data for city ${city_name}`)
+    logger.info(`[f/ get_weather] gathering data of ${city_name} from OpenWeatherAPI (Lat,Lon,Temp)`)
     try {
         var city_data = (await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${api_key}&units=metric`)).data
     } catch (err) {
@@ -57,6 +59,7 @@ async function get_weather(city_name, api_key='c23abdf2ed90b8421c9644f0d0ea85fb'
  * @returns {JSON} - returns json dictionary with status OK (200) and requested data or ERROR (404) and the error cause
  */
 async function get_sunrise_sunset(lat, lon) {
+    logger.info(`[f/ get_weather] gathering data of location (${lat},${lon}) from Sunrise-Sunset API (Sunrise,Sunset)`)
     var city_suntimes = (await axios.get(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}&formatted=0`)).data
     if (city_suntimes['results']['sunrise'].includes('1970')) {
         return {
