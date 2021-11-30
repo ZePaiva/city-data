@@ -3,12 +3,22 @@ const config = require('config');
 const express = require('express');
 const logger = require('./logger');
 const expressDebug = require('debug')('app:express');
-const uncaughtDebug = require('debug')('app:Uncaught');
+
+var port;
+var frontend_port;
+var frontend_addr;
+
+try {
+    port = config.get('PORT');
+    frontend_port = config.get('FRONTEND_PORT');
+    frontend_addr = config.get('FRONTEND_IP');
+} catch (error) {
+    port = 8000;
+    frontend_port = 3000;
+    frontend_addr = '127.0.0.1';
+}
 
 const app = express();
-const port = config.get('PORT') || 8000;
-const frontend_addr = config.get('FRONTEND_IP') || '127.0.0.1';
-const frontend_port = config.get('FRONTEND_PORT') || 3000;
 
 const cdgRouter = require('./core/core');
 

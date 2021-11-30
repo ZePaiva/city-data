@@ -13,11 +13,15 @@ router.get('/city_data', async (req, res) => {
     const city_list = req.query.city_list;
     debug(`[/city_data] Received city list: ${city_list}`);
     logger.info(`[/city_data] Received city list: ${city_list}`)
+    // Check if city list is empty or not
+    // If it is empty send error status
     if (!city_list) {
         debug(`[/city_data] Received empty or no list, proceeding to return error`)
         logger.warn(`[/city_data] Received empty or no list, proceeding to return error`)
         return res.status(405).send({'message':'City List is required'})
     }
+    
+    // Iterates over each city and gets it's name 
     for (var index = 0, doc = {}, cities = city_list.split(','); index < cities.length; index++) {
         debug(`[/city_data] Getting temperature and lat/lon for city of ${cities[index]}`)
         logger.debug(`[/city_data] Getting temperature and lat/lon for city of ${cities[index]}`)

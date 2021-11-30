@@ -1,0 +1,5 @@
+{
+    "LOG_LEVEL": "info",
+    "LOG_DIR": "./logs/",
+    "PORT": 3000
+}

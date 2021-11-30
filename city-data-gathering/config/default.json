@@ -3,6 +3,6 @@
     "LOG_LEVEL": "info",
     "LOG_DIR": "./logs/",
     "PORT": 8000,
-    "FRONTEND_IP": "FRONTEND_IP",
+    "FRONTEND_IP": "127.0.0.1",
     "FRONTEND_PORT": 3000
 }
