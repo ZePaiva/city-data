@@ -47,7 +47,7 @@ app.get('/display', async (req, res) => {
     const data = (await axios.get(`http://${backend}:${backend_port}/cdg/city_data?city_list=${req.query.city_list}`)).data
     expressDebug('data requested')
     logger.debug(`data`)
-    res.render('cities_display', { 'data':data})
+    res.render('cities_display', { 'cities':data})
 })
 
 

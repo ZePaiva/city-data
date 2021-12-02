@@ -6,6 +6,7 @@ const search = document.querySelector('input')
 //    window.location.replace(`http://localhost:3000/`)
 //}
 
+
 form.addEventListener('submit', (event) => {
     event.preventDefault()
     const city_names = search.value
