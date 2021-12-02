@@ -1,6 +1,7 @@
 const path = require('path');
 const axios = require('axios');
 const config = require('config');
+const logger = require('./logger');
 const express = require('express');
 const expressDebug = require('debug')('app:express');
 
@@ -29,7 +30,6 @@ app.get('/city', async (req, res) => {
     expressDebug(`requesting data to city display http://${backend}:${backend_port}`)
     const data = (await axios.get(`http://${backend}:${backend_port}/cdg/city_data?city_list=Porto`)).data
     expressDebug('data requested')
-    console.log(data['Porto'])
     res.render('city_display', { 'data':data})
 })
 
@@ -37,17 +37,16 @@ app.get('/cities', async (req, res) => {
     expressDebug(`requesting data to city display http://${backend}:${backend_port}`)
     const data = (await axios.get(`http://${backend}:${backend_port}/cdg/city_data?city_list=Porto,Lisboa,Aveiro, San Diego`)).data
     expressDebug('data requested')
-    console.log(data)
     res.render('cities_display', { 'data':data})
 })
 
 app.get('/display', async (req, res) => {
-    console.log(req.query.city_list)
+    logger.debug(`CityList: ${req.query.city_list}`)
     expressDebug(`CityList: ${req.query.city_list}`)
     expressDebug(`requesting data to city display http://${backend}:${backend_port}`)
     const data = (await axios.get(`http://${backend}:${backend_port}/cdg/city_data?city_list=${req.query.city_list}`)).data
     expressDebug('data requested')
-    console.log(data)
+    logger.debug(`data`)
     res.render('cities_display', { 'data':data})
 })
 

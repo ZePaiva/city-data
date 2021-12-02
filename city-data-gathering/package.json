@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "DEBUG=app:* nodemon src/index.js",
-    "test": "NODE_ENV=testing jest --coverage --forceExit"
+    "test": "NODE_ENV=testing jest --coverage --forceExit",
+    "docs": "jsdoc -c ./.jsdoc.conf.json"
   },
   "author": "ZePaiva <zmppaiva99@gmail.com>",
   "license": "ISC",
